@@ -1,0 +1,16 @@
+[
+  "Garlic Bread is an appetizer priced at $6. It is vegetarian. Description: Toasted bread with garlic butter.",
+  "Tomato Soup is an appetizer priced at $5. It is vegan. Description: Fresh tomato soup with basil.",
+  "Margherita Pizza is a main course priced at $12. It is vegetarian. Description: Classic pizza with tomato, mozzarella, basil.",
+  "Grilled Chicken is a main course priced at $18. It is non-veg. Description: Herb-marinated grilled chicken.",
+  "Vegan Buddha Bowl is a main course priced at $15. It is vegan. Description: Quinoa, roasted veggies, tahini dressing.",
+  "Chocolate Lava Cake is a dessert priced at $8. It is vegetarian. Description: Warm chocolate cake with molten center.",
+  "Fruit Salad is a dessert priced at $7. It is vegan. Description: Seasonal fresh fruit mix.",
+  "Our appetizers include Garlic Bread ($6, vegetarian) and Tomato Soup ($5, vegan).",
+  "Our main courses include Margherita Pizza ($12, vegetarian), Grilled Chicken ($18, non-veg), and Vegan Buddha Bowl ($15, vegan).",
+  "Our desserts include Chocolate Lava Cake ($8, vegetarian) and Fruit Salad ($7, vegan).",
+  "Vegan options on our menu: Tomato Soup ($5), Vegan Buddha Bowl ($15), and Fruit Salad ($7).",
+  "Vegetarian options on our menu: Garlic Bread ($6), Margherita Pizza ($12), and Chocolate Lava Cake ($8).",
+  "The cheapest item is Tomato Soup at $5. The most expensive item is Grilled Chicken at $18.",
+  "Bella Roma is an Italian-inspired restaurant offering appetizers, main courses, and desserts with vegetarian, vegan, and non-veg options."
+]

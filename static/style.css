@@ -1,0 +1,554 @@
+/* ============================================
+   Bella Roma AI — Elegant Café-Themed Styles
+   ============================================ */
+
+/* -- CSS Variables -- */
+:root {
+    --primary-green: #4F5D3A;
+    --cream-bg: #F5F1E8;
+    --accent-gold: #C89F65;
+    --dark-text: #2E2E2E;
+    --success: #3D8B5A;
+    --error: #B24C4C;
+    --white: #FFFFFF;
+    --bot-bubble: #FAF6EE;
+    --user-bubble: #4F5D3A;
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --radius-lg: 20px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -- Reset & Base -- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--cream-bg);
+    color: var(--dark-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* -- Scattered Pizza Background Icons -- */
+.pizza-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.pizza-icon {
+    position: absolute;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.pizza-icon:nth-child(1) {
+    top: 5%;
+    left: 3%;
+    width: 60px;
+    height: 60px;
+    transform: rotate(-25deg);
+    opacity: 0.05;
+}
+
+.pizza-icon:nth-child(2) {
+    top: 12%;
+    right: 8%;
+    width: 50px;
+    height: 50px;
+    transform: rotate(15deg);
+    opacity: 0.07;
+}
+
+.pizza-icon:nth-child(3) {
+    bottom: 20%;
+    left: 6%;
+    width: 70px;
+    height: 70px;
+    transform: rotate(45deg);
+    opacity: 0.05;
+}
+
+.pizza-icon:nth-child(4) {
+    top: 45%;
+    right: 4%;
+    width: 45px;
+    height: 45px;
+    transform: rotate(-10deg);
+    opacity: 0.06;
+}
+
+.pizza-icon:nth-child(5) {
+    bottom: 8%;
+    right: 15%;
+    width: 55px;
+    height: 55px;
+    transform: rotate(30deg);
+    opacity: 0.08;
+}
+
+.pizza-icon:nth-child(6) {
+    top: 70%;
+    left: 15%;
+    width: 40px;
+    height: 40px;
+    transform: rotate(-40deg);
+    opacity: 0.05;
+}
+
+.pizza-icon:nth-child(7) {
+    top: 30%;
+    left: 85%;
+    width: 65px;
+    height: 65px;
+    transform: rotate(55deg);
+    opacity: 0.06;
+}
+
+.pizza-icon:nth-child(8) {
+    bottom: 35%;
+    left: 90%;
+    width: 48px;
+    height: 48px;
+    transform: rotate(-60deg);
+    opacity: 0.07;
+}
+
+.pizza-icon:nth-child(9) {
+    top: 85%;
+    left: 45%;
+    width: 55px;
+    height: 55px;
+    transform: rotate(20deg);
+    opacity: 0.05;
+}
+
+.pizza-icon:nth-child(10) {
+    top: 3%;
+    left: 50%;
+    width: 42px;
+    height: 42px;
+    transform: rotate(-35deg);
+    opacity: 0.06;
+}
+
+/* -- Chat Container -- */
+.chat-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 600px;
+    height: 90vh;
+    max-height: 720px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(200, 159, 101, 0.15);
+}
+
+/* -- Header -- */
+.chat-header {
+    background: linear-gradient(135deg, var(--primary-green) 0%, #3E4A2D 100%);
+    color: var(--white);
+    padding: 20px 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.chat-header h1 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.chat-header p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+/* -- Messages Area -- */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--cream-bg);
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(79, 93, 58, 0.2);
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(79, 93, 58, 0.35);
+}
+
+/* -- Message Bubbles -- */
+.message {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    animation: fadeInUp 0.35s ease-out;
+    max-width: 85%;
+}
+
+.message.bot {
+    align-self: flex-start;
+}
+
+.message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.message.bot .message-avatar {
+    background: var(--accent-gold);
+    color: var(--white);
+}
+
+.message.user .message-avatar {
+    background: var(--primary-green);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.message-content {
+    padding: 12px 16px;
+    line-height: 1.55;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.message.bot .message-content {
+    background: var(--bot-bubble);
+    color: var(--dark-text);
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 6px;
+    border: 1px solid rgba(200, 159, 101, 0.12);
+}
+
+.message.user .message-content {
+    background: var(--user-bubble);
+    color: var(--white);
+    border-radius: var(--radius-lg) var(--radius-lg) 6px var(--radius-lg);
+}
+
+/* -- Typing Indicator -- */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.typing-indicator .message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.typing-bubble {
+    background: var(--bot-bubble);
+    border: 1px solid rgba(200, 159, 101, 0.12);
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 6px;
+    padding: 12px 18px;
+    font-size: 0.85rem;
+    color: var(--primary-green);
+    font-style: italic;
+}
+
+.typing-dots {
+    display: inline-flex;
+    gap: 3px;
+    margin-left: 4px;
+}
+
+.typing-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    animation: bounce 1.4s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(1) { animation-delay: 0s; }
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* -- Input Area -- */
+.chat-input-area {
+    padding: 16px 20px;
+    background: var(--white);
+    border-top: 1px solid rgba(200, 159, 101, 0.15);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1.5px solid rgba(79, 93, 58, 0.2);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    background: var(--cream-bg);
+    color: var(--dark-text);
+    outline: none;
+    transition: var(--transition);
+}
+
+.chat-input:focus {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(200, 159, 101, 0.15);
+}
+
+.chat-input::placeholder {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.send-btn {
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    flex-shrink: 0;
+    font-size: 1.15rem;
+}
+
+.send-btn:hover {
+    background: #B38D55;
+    transform: scale(1.05);
+}
+
+.send-btn:active {
+    transform: scale(0.95);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* -- Quick Actions -- */
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 20px 12px;
+    background: var(--white);
+    flex-shrink: 0;
+}
+
+.quick-btn {
+    padding: 7px 14px;
+    border: 1.5px solid rgba(79, 93, 58, 0.25);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--primary-green);
+    font-size: 0.75rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.quick-btn:hover {
+    background: var(--primary-green);
+    color: var(--white);
+    border-color: var(--primary-green);
+}
+
+/* -- Animations -- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* -- Responsive -- */
+@media (max-width: 640px) {
+    body {
+        justify-content: flex-end;
+    }
+
+    .chat-container {
+        max-width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+
+    .chat-header {
+        padding: 16px 18px;
+        border-radius: 0;
+    }
+
+    .chat-header h1 {
+        font-size: 1.15rem;
+    }
+
+    .chat-messages {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .message-content {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+
+    .chat-input-area {
+        padding: 12px 14px;
+    }
+
+    .chat-input {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    .quick-actions {
+        padding: 0 14px 10px;
+    }
+
+    .quick-btn {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+    }
+
+    /* Reposition pizza icons for mobile */
+    .pizza-icon:nth-child(4),
+    .pizza-icon:nth-child(7),
+    .pizza-icon:nth-child(8) {
+        display: none;
+    }
+
+    .pizza-icon:nth-child(1) {
+        top: 2%;
+        left: 5%;
+        width: 40px;
+        height: 40px;
+    }
+
+    .pizza-icon:nth-child(2) {
+        top: 8%;
+        right: 5%;
+        width: 35px;
+        height: 35px;
+    }
+
+    .pizza-icon:nth-child(3) {
+        bottom: 15%;
+        left: 3%;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 380px) {
+    .chat-header h1 {
+        font-size: 1.05rem;
+    }
+
+    .chat-header p {
+        font-size: 0.72rem;
+    }
+
+    .send-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}

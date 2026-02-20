@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Roma — AI Restaurant Bot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+</head>
+<body>
+
+    <!-- Scattered Pizza Background -->
+    <div class="pizza-bg">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+        <img src="/static/pizza.svg" alt="" class="pizza-icon" aria-hidden="true">
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+
+        <!-- Header -->
+        <div class="chat-header">
+            <h1>🍕 Bella Roma</h1>
+            <p>AI-Powered Restaurant Assistant</p>
+        </div>
+
+        <!-- Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Welcome message injected by JS -->
+        </div>
+
+        <!-- Quick Action Buttons -->
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="sendQuickMessage('What vegan options do you have?')">🌱 Vegan Options</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Show me the menu')">📜 Full Menu</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Book a table for 2 at 19:00')">📅 Book Table</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Check availability at 20:00')">🕐 Availability</button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input-area">
+            <input
+                type="text"
+                class="chat-input"
+                id="chatInput"
+                placeholder="Ask about our menu or book a table..."
+                autocomplete="off"
+                maxlength="500"
+            >
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send message">
+                ➤
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        /* =============================================
+           Bella Roma AI — Chat Interface Logic
+           ============================================= */
+
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        /* -- Welcome Message on Load -- */
+        window.addEventListener('DOMContentLoaded', () => {
+            addBotMessage(
+                "Welcome to Bella Roma! 🍕\n\n" +
+                "I'm your AI assistant. I can help you with:\n\n" +
+                "🍽️ Menu questions — ask about dishes, prices, dietary options\n" +
+                "📅 Reservations — book a table, check availability\n\n" +
+                "How can I help you today?"
+            );
+        });
+
+        /* -- Send Message -- */
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            addUserMessage(message);
+            chatInput.value = '';
+            chatInput.focus();
+
+            // Disable input while processing
+            setInputState(false);
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message }),
+                });
+
+                const data = await response.json();
+
+                // Remove typing indicator and show response
+                removeTypingIndicator();
+                addBotMessage(data.response);
+            } catch (error) {
+                removeTypingIndicator();
+                addBotMessage("I'm sorry, something went wrong. Please try again in a moment. 🍕");
+            } finally {
+                setInputState(true);
+            }
+        }
+
+        /* -- Quick Message Buttons -- */
+        function sendQuickMessage(text) {
+            chatInput.value = text;
+            sendMessage();
+        }
+
+        /* -- Add User Message Bubble -- */
+        function addUserMessage(text) {
+            const messageEl = document.createElement('div');
+            messageEl.className = 'message user';
+            messageEl.innerHTML = `
+                <div class="message-avatar">You</div>
+                <div class="message-content">${escapeHtml(text)}</div>
+            `;
+            chatMessages.appendChild(messageEl);
+            scrollToBottom();
+        }
+
+        /* -- Add Bot Message Bubble -- */
+        function addBotMessage(text) {
+            const messageEl = document.createElement('div');
+            messageEl.className = 'message bot';
+            messageEl.innerHTML = `
+                <div class="message-avatar">🍕</div>
+                <div class="message-content">${escapeHtml(text)}</div>
+            `;
+            chatMessages.appendChild(messageEl);
+            scrollToBottom();
+        }
+
+        /* -- Typing Indicator -- */
+        function showTypingIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.id = 'typingIndicator';
+            indicator.innerHTML = `
+                <div class="message-avatar">🍕</div>
+                <div class="typing-bubble">
+                    Thinking
+                    <span class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </div>
+            `;
+            chatMessages.appendChild(indicator);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        /* -- Input State Management -- */
+        function setInputState(enabled) {
+            chatInput.disabled = !enabled;
+            sendBtn.disabled = !enabled;
+        }
+
+        /* -- Scroll Chat to Bottom -- */
+        function scrollToBottom() {
+            requestAnimationFrame(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            });
+        }
+
+        /* -- Escape HTML to Prevent XSS -- */
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        /* -- Enter Key to Send -- */
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+
+</body>
+</html>

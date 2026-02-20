@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Garlic Bread",
+    "price": 6,
+    "category": "Appetizers",
+    "dietary": "vegetarian",
+    "description": "Toasted bread with garlic butter"
+  },
+  {
+    "name": "Tomato Soup",
+    "price": 5,
+    "category": "Appetizers",
+    "dietary": "vegan",
+    "description": "Fresh tomato soup with basil"
+  },
+  {
+    "name": "Margherita Pizza",
+    "price": 12,
+    "category": "Main Course",
+    "dietary": "vegetarian",
+    "description": "Classic pizza with tomato, mozzarella, basil"
+  },
+  {
+    "name": "Grilled Chicken",
+    "price": 18,
+    "category": "Main Course",
+    "dietary": "non-veg",
+    "description": "Herb-marinated grilled chicken"
+  },
+  {
+    "name": "Vegan Buddha Bowl",
+    "price": 15,
+    "category": "Main Course",
+    "dietary": "vegan",
+    "description": "Quinoa, roasted veggies, tahini dressing"
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "price": 8,
+    "category": "Desserts",
+    "dietary": "vegetarian",
+    "description": "Warm chocolate cake with molten center"
+  },
+  {
+    "name": "Fruit Salad",
+    "price": 7,
+    "category": "Desserts",
+    "dietary": "vegan",
+    "description": "Seasonal fresh fruit mix"
+  }
+]

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Pizza slice shape -->
+  <path d="M32 4 L60 56 Q32 64 4 56 Z" fill="#E8C07A" stroke="#C89F65" stroke-width="1.5"/>
+  <!-- Tomato sauce layer -->
+  <path d="M32 12 L54 52 Q32 58 10 52 Z" fill="#D4654A" opacity="0.7"/>
+  <!-- Cheese blobs -->
+  <circle cx="30" cy="28" r="4" fill="#F5E6B8" opacity="0.85"/>
+  <circle cx="22" cy="40" r="3.5" fill="#F5E6B8" opacity="0.85"/>
+  <circle cx="38" cy="38" r="3" fill="#F5E6B8" opacity="0.85"/>
+  <circle cx="28" cy="48" r="3.5" fill="#F5E6B8" opacity="0.85"/>
+  <!-- Pepperoni -->
+  <circle cx="32" cy="34" r="2.5" fill="#A83232" opacity="0.8"/>
+  <circle cx="24" cy="44" r="2" fill="#A83232" opacity="0.8"/>
+  <circle cx="36" cy="46" r="2.2" fill="#A83232" opacity="0.8"/>
+  <!-- Basil leaf -->
+  <ellipse cx="28" cy="36" rx="3" ry="1.5" fill="#4F5D3A" opacity="0.7" transform="rotate(-30 28 36)"/>
+  <!-- Crust highlight -->
+  <path d="M32 4 L60 56" stroke="#D4A84B" stroke-width="0.8" opacity="0.4"/>
+  <path d="M32 4 L4 56" stroke="#D4A84B" stroke-width="0.8" opacity="0.4"/>
+</svg>
