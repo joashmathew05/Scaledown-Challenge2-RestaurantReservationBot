@@ -1,6 +1,6 @@
 # 🍕 Bella Roma — AI Restaurant Reservation Bot
 
-A modern, AI-powered restaurant reservation and menu assistant built with **FastAPI**, **LangChain**, **Groq (LLaMA 3.3)**, **HuggingFace Embeddings**, and **FAISS**. Features an elegant café-themed chat interface with a subtle pizza-pattern aesthetic.
+A modern, AI-powered restaurant reservation and menu assistant built with **FastAPI**, **LangChain**, **Groq (LLaMA 3.3 70B)**, **HuggingFace Embeddings**, and **FAISS**. Features an elegant café-themed chat interface with a subtle pizza-pattern aesthetic.
 
 ---
 
@@ -34,11 +34,10 @@ Users can ask about menu items, dietary options, pricing, and make table reserva
 │   │  Booking Engine  │     │    RAG Engine       │    │
 │   │  (rule-based)    │     │  (LangChain+FAISS) │    │
 │   │                  │     │                    │     │
-│   │  • check avail.  │     │  • HuggingFace     │    │
-│   │  • book table    │     │    Embeddings      │    │
-│   │  • suggest alt.  │     │  • FAISS search    │    │
-│   └─────────────────┘     │  • Groq LLaMA 3.3  │    │
-│                           └────────────────────┘     │
+│   │  • check avail.  │     │  • OpenAI Embed.   │    │
+│   │  • book table    │     │  • FAISS search    │    │
+│   │  • suggest alt.  │     │  • GPT-4o-mini     │    │
+│   └─────────────────┘     └────────────────────┘     │
 │                                                      │
 │   ┌──────────────────────────────────────────────┐   │
 │   │              Data Layer (JSON)                │   │
@@ -58,7 +57,7 @@ The RAG engine powers menu-related conversations:
 2. **Embedding** — Text chunks are embedded locally using HuggingFace's `all-MiniLM-L6-v2` model (free, no API key needed)
 3. **Vector Store** — Embeddings are stored in a FAISS index for fast similarity search
 4. **Retrieval** — User queries are matched against the top-4 most relevant menu chunks
-5. **Generation** — Groq-hosted LLaMA 3.3 70B generates a response using only the retrieved context
+5. **Generation** — Groq's `llama-3.3-70b-versatile` generates a response using only the retrieved context
 6. **Guardrails** — A strict system prompt ensures the bot only answers from the menu data
 
 ---
@@ -99,7 +98,7 @@ The interface features an **elegant café aesthetic** inspired by premium bakery
 ### Prerequisites
 
 - Python 3.10+
-- A free Groq API key — get one at [console.groq.com/keys](https://console.groq.com/keys)
+- A free Groq API key → [Get one here](https://console.groq.com/keys)
 
 ### Setup
 
@@ -107,6 +106,10 @@ The interface features an **elegant café aesthetic** inspired by premium bakery
 # Clone the repository
 git clone https://github.com/joashmathew05/Scaledown-Challenge2-RestaurantReservationBot.git
 cd Scaledown-Challenge2-RestaurantReservationBot
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -160,7 +163,7 @@ Open your browser at **http://localhost:8000**
 |-----------|-----------|
 | Backend | Python 3.10+, FastAPI, Uvicorn |
 | LLM | Groq — LLaMA 3.3 70B Versatile |
-| Embeddings | HuggingFace `all-MiniLM-L6-v2` (local, free) |
+| Embeddings | HuggingFace — all-MiniLM-L6-v2 (local, free) |
 | RAG | LangChain, FAISS |
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
 | Data | JSON (menu, availability) |

@@ -6,10 +6,11 @@ venv/
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
+*.pyo
 *.egg-info/
 dist/
 build/
+*.egg
 
 # IDE
 .vscode/
@@ -18,8 +19,8 @@ build/
 *.swo
 
 # OS
-Thumbs.db
 .DS_Store
+Thumbs.db
 
-# HuggingFace cache
+# HuggingFace model cache
 .cache/
